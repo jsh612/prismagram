@@ -2,9 +2,6 @@ import { prisma } from "../../../../generated/prisma-client";
 
 export default {
   Query: {
-    sayHello: async () => {
-      console.log(await prisma.users());
-      return "안녕";
-    }
+    allUsers: async () => prisma.users()
   }
 };
