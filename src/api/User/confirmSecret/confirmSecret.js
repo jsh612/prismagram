@@ -1,4 +1,5 @@
 import { prisma } from "../../../../generated/prisma-client";
+import { generateToken } from "../../../utils";
 
 export default {
   Mutation: {
@@ -6,8 +7,8 @@ export default {
       const { secret, email } = args;
       const user = await prisma.user({ email });
       if (user.loginSecret === secret) {
-        // JWT 리턴
-        return "TOKEN";
+        // token 생성
+        return generateToken(user.id);
       } else {
         throw Error("잘못된 email/비밀문자 결합입니다.");
       }

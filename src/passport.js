@@ -1,10 +1,11 @@
 import passport from "passport";
-import JwtStrategy from "passport-jwt";
+import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
+import { prisma } from "../generated/prisma-client";
+import dotenv from "dotenv";
 dotenv.config();
 
-console.log("passport.js / JWT_SECRET", JWT_SECRET);
 const jwtOptions = {
-  jwtFromRequest: JwtStrategy.ExtractJwt.fromAuthHeaderAsBearerToken(),
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: process.env.JWT_SECRET
 };
 
@@ -14,6 +15,18 @@ const jwtOptions = {
 //    it will use the strategy and then extract information,
 //    and then load it onto our request message.
 
-const verifyUser = (jwt_payload, done) => {};
+const verifyUser = async (payload, done) => {
+  try {
+    console.log("passport.js / verifyUser / payload: ", payload);
+    const user = await prisma.user({ id: payload.id });
+    if (user) {
+      return done(null, user);
+    }
+    return done(null, false);
+  } catch (error) {
+    console.log("jwt 인증오류 : ", error);
+    return done(error, false);
+  }
+};
 
 passport.use(new JwtStrategy(jwtOptions, verifyUser));

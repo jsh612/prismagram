@@ -2,6 +2,8 @@ import { adjectives, nouns } from "./words";
 import dotenv from "dotenv";
 import nodemailer from "nodemailer";
 import sgTransport from "nodemailer-sendgrid-transport";
+import jwt from "jsonwebtoken";
+
 dotenv.config();
 
 // 임의 문자 생성 함수
@@ -33,4 +35,11 @@ export const sendSecretMail = (adress, secret) => {
     html: `안녕하세요. 당신의 로그인 secret은  <i><strong>${secret}</strong></i>  입니다.<br> 이 값을 복사하여 앱에 붙여넣기 해주세요`
   };
   return sendMail(email);
+};
+
+// 토큰 생성 함수
+export const generateToken = id => {
+  // user의 id를 암호화하여 token 생성
+  // 암호 해독할떄와 같은 secret key 사용
+  return jwt.sign({ id }, process.env.JWT_SECRET);
 };
