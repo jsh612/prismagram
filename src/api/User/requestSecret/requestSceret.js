@@ -3,11 +3,13 @@ import { prisma } from "../../../../generated/prisma-client";
 
 export default {
   Mutation: {
-    requestSceret: async (_, arg) => {
+    requestSceret: async (_, arg, { request }) => {
+      console.log("requestSceret.js / request.user: ", request.user); // context 내용확인
       const { email } = arg;
       const loginSecret = generateSecret();
       console.log("로그인시크릿", loginSecret);
       try {
+        throw Error(); // context 테스트 하려고 임시로 에러를 띄움
         // 이메일 보내기
         sendSecretMail(email, loginSecret);
 

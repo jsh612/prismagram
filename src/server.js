@@ -8,15 +8,26 @@ import path from "path";
 import passport from "passport";
 import "./passport";
 
+import { authenticateJwt } from "./passport";
+
 dotenv.config();
 
 const { PORT } = process.env || 4000;
 
-const server = new GraphQLServer({ schema });
+const server = new GraphQLServer({
+  schema,
+
+  //context --> app이 resolver에게 정보를 전달 할때 사용(이 정보는 모든 resolver에서 사용가능)
+  //resolver에서 해당 context 사용법: https://graphql.org/learn/execution/#root-fields-resolvers
+  context: ({ request }) => ({ request }) // request객체 가져와서 resolver에 전달
+  // context: arg => {
+  //   console.log(arg); // request객체, response객체 다 들어옴
+  // }
+});
 
 //Graphql 서버에는 Express 서버가 내장 되어있다
 server.express.use(logger("dev"));
-server.express.use(passport.authenticate("jwt"));
+server.express.use(authenticateJwt);
 
 server.start({ port: PORT }, () =>
   console.log(`✅   GraphQL서버  http://localhost:${PORT}`)
