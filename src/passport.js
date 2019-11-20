@@ -16,7 +16,8 @@ const jwtOptions = {
 const verifyUser = async (payload, done) => {
   try {
     // 해당 유저가 있는지 없는지를 찾는다.
-    console.log("passport.js / verifyUser / payload: ", payload);
+    // console.log("passport.js / verifyUser / payload: ", payload);
+    // payload --> { id: 'ck344qfgit8fo0b092yvzx58x', iat: 1574245227 }
     const user = await prisma.user({ id: payload.id });
     if (user) {
       return done(null, user);
