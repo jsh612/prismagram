@@ -9,6 +9,7 @@ import passport from "passport";
 import "./passport";
 
 import { authenticateJwt } from "./passport";
+import { isAuthenticated } from "../middlewares";
 
 dotenv.config();
 
@@ -19,7 +20,8 @@ const server = new GraphQLServer({
 
   //context --> app이 resolver에게 정보를 전달 할때 사용(이 정보는 모든 resolver에서 사용가능)
   //resolver에서 해당 context 사용법: https://graphql.org/learn/execution/#root-fields-resolvers
-  context: ({ request }) => ({ request }) // request객체 가져와서 resolver에 전달
+  context: ({ request }) => ({ request, isAuthenticated })
+  // request객체 가져와서 resolver에 전달 // isAuthenticated를 전달
   // context: arg => {
   //   console.log(arg); // request객체, response객체 다 들어옴
   // }
