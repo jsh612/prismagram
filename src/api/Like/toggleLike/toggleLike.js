@@ -8,28 +8,30 @@ export default {
       isAuthenticated(request);
       const { postId } = args;
       const { user } = request;
+      const filterLikeOpts = {
+        // AND 로 두개의 조건 사용 가능
+        AND: [
+          {
+            user: {
+              id: user.id
+            }
+          },
+          {
+            post: {
+              id: postId
+            }
+          }
+        ]
+      };
       try {
         // 해당 유저가 해당 게시물에 like를 했는지 여부를 찾는다.
-        const existingLike = await prisma.$exists.like({
-          // AND 로 두개의 조건 사용 가능
-          AND: [
-            {
-              user: {
-                id: user.id
-              }
-            },
-            {
-              post: {
-                id: postId
-              }
-            }
-          ]
-        });
+        const existingLike = await prisma.$exists.like(filterLikeOpts);
         if (existingLike) {
           //TO DO (이전에 like를 했는데 다시 클릭시 like 취소, 즉 like 취소)
+          await prisma.deleteManyLikes(filterLikeOpts);
         } else {
           // 이전에 좋아혀를 누른적이 없을 경우, like 생성
-          const newLike = prisma.createLike({
+          await prisma.createLike({
             user: {
               connect: {
                 id: user.id

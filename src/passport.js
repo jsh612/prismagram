@@ -1,7 +1,6 @@
 import passport from "passport";
 import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
 import { prisma } from "../generated/prisma-client";
-import { request } from "express";
 
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -16,6 +15,7 @@ const jwtOptions = {
 
 const verifyUser = async (payload, done) => {
   try {
+    // 해당 유저가 있는지 없는지를 찾는다.
     console.log("passport.js / verifyUser / payload: ", payload);
     const user = await prisma.user({ id: payload.id });
     if (user) {
