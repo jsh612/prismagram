@@ -11,12 +11,5 @@ export default {
       const posts = await prisma.user({ id: user.id }).posts();
       return { user: userProfile, posts };
     }
-  },
-  User: {
-    fullName: (parent) => {
-      // console.log("me.js:", parents) // User 객체 
-      //resolver의 첫번째 인자 = 부로를 가져온다 (fullName의 부모는 User)
-      return `${parent.firstName} ${parent.lastName}`
-    }
   }
 };
