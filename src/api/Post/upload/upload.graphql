@@ -1,0 +1,4 @@
+# files --> file의 url
+type Mutation {
+  upload(caption: String!, files: [String!]!): Post!
+}

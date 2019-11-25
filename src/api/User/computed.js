@@ -34,8 +34,29 @@ export default {
     isSelf: (parent, _, { request }) => {
       // 해당 유저가 로그인한 "나"인지 확인
       const { user } = request;
-      const { id: parentId } = parent;
+      const { id } = parent;
       return user.id === parentId;
+    }
+  },
+  Post: {
+    isLiked: (parent, _, { request }) => {
+      // 해당 Like 가 있는지를 찾는다.
+      const { id } = parent;
+      const { user } = request;
+      return prisma.$exists.like({
+        AND: [
+          {
+            user: {
+              id: user.id
+            }
+          },
+          {
+            post: {
+              id
+            }
+          }
+        ]
+      });
     }
   }
 };
