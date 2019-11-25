@@ -1,0 +1,15 @@
+# 열거형 타입 enum
+# https://graphql.org/learn/schema/#enumeration-types
+enum ACTION {
+  DELETE
+  EDIT
+}
+
+type Mutation {
+  editPost(
+    id: String!
+    caption: String
+    location: String
+    action: ACTION!
+  ): Post!
+}
