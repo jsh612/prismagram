@@ -37,26 +37,5 @@ export default {
       const { id } = parent;
       return user.id === parentId;
     }
-  },
-  Post: {
-    isLiked: (parent, _, { request }) => {
-      // 해당 Like 가 있는지를 찾는다.
-      const { id } = parent;
-      const { user } = request;
-      return prisma.$exists.like({
-        AND: [
-          {
-            user: {
-              id: user.id
-            }
-          },
-          {
-            post: {
-              id
-            }
-          }
-        ]
-      });
-    }
   }
 };
