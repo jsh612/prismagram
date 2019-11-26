@@ -1,4 +1,4 @@
-# 열거형 타입 enum
+# 열거형 타입 enum ( 일종의 옵션 선택지 개념)
 # https://graphql.org/learn/schema/#enumeration-types
 enum ACTION {
   DELETE

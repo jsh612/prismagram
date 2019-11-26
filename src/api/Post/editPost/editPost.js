@@ -15,7 +15,6 @@ export default {
       });
       if (post) {
         if (action === EDIT) {
-          console.log("edit");
           return prisma.updatePost({
             where: {
               id
@@ -26,7 +25,6 @@ export default {
             }
           });
         } else if (action === DELETE) {
-          console.log("del");
           return prisma.deletePost({ id });
         }
       } else {
