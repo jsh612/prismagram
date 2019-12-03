@@ -23,7 +23,7 @@ export default {
         }
       } else {
         // 이미 대화방이 있는경우, 그 대화방에서 참여자 id를 찾아낸다.
-        room = await prisma.room({ id: roomId }).$fragment(ROOM_FRAGMENT);
+        room = await prisma.room({ id: roomId });
         if (!room) {
           throw Error("해당 대화방을 찾을 수 없습니다.");
         }

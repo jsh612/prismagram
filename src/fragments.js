@@ -1,3 +1,5 @@
+// 해당 파일은 사용 되지 않지만 fragment 작성 방법 보려고 작성해둠
+
 export const USER_FRAGMENT = `
     id
     username
