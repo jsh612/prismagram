@@ -1,5 +1,4 @@
 import { prisma } from "../../../../generated/prisma-client";
-import { ROOM_FRAGMENT } from "../../../fragments";
 
 export default {
   Query: {
@@ -14,7 +13,9 @@ export default {
         }
       });
       if (canSee) {
-        return prisma.room({ id: roomId });
+        // return prisma.room({ id: roomId });
+        const room = await prisma.room({ id: roomId });
+        return room;
       } else {
         throw Error("해당 대화방을 볼 수 없습니다.");
       }

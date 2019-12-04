@@ -10,7 +10,7 @@ export default {
       //  need to be provided as the value for a subscribe field.
       //  You also need to provide another field called resolve that
       //  actually returns the data from the data emitted by the AsyncIterator.
-      subscribe: (_, args, jsh) => {
+      subscribe: (_, args) => {
         const { roomId } = args;
         return prisma.$subscribe
           .message({
