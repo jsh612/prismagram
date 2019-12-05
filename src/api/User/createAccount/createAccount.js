@@ -5,6 +5,10 @@ export default {
     createAccount: async (_, args) => {
       // firstName 등에 빈문자열로 구조분해할당 기본값 설정
       const { username, email, firstName = "", lastName = "", bio = "" } = args;
+      const exists = await prisma.$exists.user({ username });
+      if (exists) {
+        throw Error("해당 username이 존재합니다.");
+      }
       try {
         const user = await prisma.createUser({
           username,
