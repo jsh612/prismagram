@@ -12,7 +12,6 @@ const jwtOptions = {
 //    So, when passport parses the request message,
 //    it will use the strategy and then extract information,
 //    and then load it onto our request message.
-
 const verifyUser = async (payload, done) => {
   try {
     // 해당 유저가 있는지 없는지를 찾는다.
