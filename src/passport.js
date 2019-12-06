@@ -31,13 +31,13 @@ const verifyUser = async (payload, done) => {
 
 passport.use(new JwtStrategy(jwtOptions, verifyUser));
 
-//1. custom callback
-//  - a custom callback can be provided to allow the application to handle success or failure.
-//  - 즉, 인증단계 이후에 실행된다.
-//  - http://www.passportjs.org/docs/authenticate/
-//  - 위의 주소에서 custom callback 내용 보기
-//2. passport.authenticate() 은 함수를 리턴하고 바로 실행(IIFE 문법 / 즉시실행함수)
 export const authenticateJwt = (req, res, next) =>
+  //1. custom callback (passport.authenticate 함수의)
+  //  - a custom callback can be provided to allow the application to handle success or failure.
+  //  - 즉, 인증단계 이후에 실행된다.
+  //  - http://www.passportjs.org/docs/authenticate/
+  //  - 위의 주소에서 custom callback 내용 보기
+  //2. passport.authenticate() 은 함수를 리턴하고 바로 실행(IIFE 문법 / 즉시실행함수)
   passport.authenticate("jwt", { session: false }, (err, user) => {
     if (user) {
       // verifyUser에서 사용자를 받아온 후에, req에 붙여 준다.
