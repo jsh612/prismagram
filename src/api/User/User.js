@@ -51,7 +51,7 @@ export default {
       // 해당 유저가 로그인한 "나"인지 확인
       const { user } = request;
       const { id } = parent;
-      return user.id === parentId;
+      return user.id === id;
     }
   }
 };

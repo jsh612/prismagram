@@ -6,9 +6,8 @@ export default {
     comments: ({ id }) => prisma.post({ id }).comments(),
     user: ({ id }) => prisma.post({ id }).user(),
     likes: ({ id }) => prisma.post({ id }).likes(),
-    isLiked: (parent, _, { request }) => {
+    isLiked: ({ id }, _, { request }) => {
       // 해당 Like 가 있는지를 찾는다.
-      const { id } = parent;
       const { user } = request;
       return prisma.$exists.like({
         AND: [
