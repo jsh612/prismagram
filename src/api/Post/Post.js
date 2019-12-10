@@ -34,6 +34,17 @@ export default {
         .count();
       // 집합 관련(ex/ count)
       // -->https://www.prisma.io/docs/prisma-client/basic-data-access/reading-data-JAVASCRIPT-rsc2/#aggregations
+    },
+    commentCount: async parent => {
+      return prisma
+        .commentsConnection({
+          // where 통해 comments 검색 조건 생성
+          where: { post: { id: parent.id } }
+        })
+        .aggregate()
+        .count();
+      // 집합 관련(ex/ count)
+      // -->https://www.prisma.io/docs/prisma-client/basic-data-access/reading-data-JAVASCRIPT-rsc2/#aggregations
     }
   }
 };
