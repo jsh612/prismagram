@@ -11,6 +11,7 @@ type User {
   bio: String
   following: [User!]!
   followingCount: Int!
+  postsCount: Int!
   followers: [User!]!
   followersCount: Int!
   posts: [Post!]!
