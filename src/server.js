@@ -10,6 +10,7 @@ import "./passport";
 
 import { authenticateJwt } from "./passport";
 import { isAuthenticated } from "../middlewares";
+import { uploadMiddleware, uploadController } from "./upload";
 
 dotenv.config();
 
@@ -30,6 +31,7 @@ const server = new GraphQLServer({
 //Graphql 서버에는 Express 서버가 내장 되어있다
 server.express.use(logger("dev"));
 server.express.use(authenticateJwt);
+server.express.post("/api/upload", uploadMiddleware, uploadController);
 
 server.start({ port: PORT }, () =>
   console.log(`✅   GraphQL서버  http://localhost:${PORT}`)
