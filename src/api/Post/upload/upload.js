@@ -4,7 +4,7 @@ export default {
   Mutation: {
     upload: async (_, args, { request, isAuthenticated }) => {
       isAuthenticated(request);
-      const { caption, files } = args;
+      const { caption, files, location } = args;
       const { user } = request;
       const post = await prisma.createPost({
         caption,
@@ -12,7 +12,8 @@ export default {
           connect: {
             id: user.id
           }
-        }
+        },
+        location
       });
       // file을 생성하여 위에서 생성된 post에 연결해준다.
       files.forEach(
