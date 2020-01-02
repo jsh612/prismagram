@@ -5,6 +5,9 @@
   "repository": "https://github.com/jsh612/prismagram.git",
   "author": "seungho Jeon <urijsh612@gmail.com>",
   "license": "MIT",
+  "engines": {
+    "yarn": "1.21.1"
+  },
   "dependencies": {
     "@babel/cli": "^7.7.7",
     "@babel/core": "^7.7.7",
