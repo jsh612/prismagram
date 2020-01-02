@@ -27,11 +27,10 @@
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "prisma": "^1.34.10",
-    "prisma-client-lib": "^1.34.10"
-  },
-  "devDependencies": {
+    "prisma-client-lib": "^1.34.10",
     "nodemon": "^1.19.4"
   },
+  "devDependencies": {},
   "scripts": {
     "deploy": "prisma deploy",
     "generate": "prisma generate",
