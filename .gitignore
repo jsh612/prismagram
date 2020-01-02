@@ -63,3 +63,5 @@ typings/
 generated
 src/words.js
 build
+package-lock.json
+package-lock.json
