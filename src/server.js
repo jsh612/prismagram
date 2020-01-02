@@ -35,5 +35,5 @@ server.express.use(authenticateJwt);
 server.express.post("/api/upload", uploadMiddleware, uploadController);
 
 server.start({ port: PORT }, () =>
-  console.log(`✅   GraphQL서버  http://localhost:${PORT}`)
+  console.log(`GraphQL서버  http://localhost:${PORT}`)
 );
