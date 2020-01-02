@@ -9,7 +9,7 @@ import passport from "passport";
 import "./passport";
 
 import { authenticateJwt } from "./passport";
-import { isAuthenticated } from "../middlewares";
+import { isAuthenticated } from "./middlewares";
 import { uploadMiddleware, uploadController } from "./upload";
 
 dotenv.config();

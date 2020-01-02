@@ -1,4 +1,4 @@
-import { isAuthenticated } from "../../../../middlewares";
+import { isAuthenticated } from "../../../middlewares";
 import { prisma } from "../../../../generated/prisma-client";
 
 // Like를 바꾸는 역활(좋아요, 싫어요 표시)
