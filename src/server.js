@@ -3,6 +3,7 @@ import { GraphQLServer } from "graphql-yoga";
 import logger from "morgan";
 import schema from "./schema";
 import path from "path";
+import "./env";
 
 // 인증 처리 적용을 위해 passport모듈과 passport.js import
 import passport from "passport";
