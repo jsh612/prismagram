@@ -8,10 +8,29 @@ export default {
       // 이를 위해 roomId, 내 id, 상대방 id 필요
       isAuthenticated(request);
       const { user } = request;
+
       const { roomId, message, toId } = args;
-      let room = null;
       let notMe = null;
-      if (!roomId) {
+
+      let findedRooms = await prisma.rooms({
+        where: {
+          AND: [
+            {
+              participants_some: {
+                id: user.id
+              }
+            },
+            {
+              participants_some: {
+                id: toId
+              }
+            }
+          ]
+        }
+      });
+      let room = findedRooms[0];
+      console.log("db 룸::", room);
+      if (!roomId && !room) {
         // 나혼자 room 만들지 않게 하기위해서 체크
         if (user.id !== toId) {
           // 대화방이 없는경우 새로 생성하여 필요 정보를 가져온다.
@@ -23,7 +42,7 @@ export default {
             })
             .$fragment(ROOM_FRAGMENT);
         }
-      } else {
+      } else if (!room) {
         // 이미 대화방이 있는경우, 그 대화방에서 참여자 id를 찾아낸다.
         room = await prisma.room({ id: roomId }).$fragment(ROOM_FRAGMENT);
         // #fragment를 안쓸 경우 participants 가 조회안된다.
