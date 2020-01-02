@@ -39,7 +39,6 @@
     "dev": "nodemon --exec babel-node src/server.js",
     "prebuild": "npm run prisma",
     "build": "babel src -d build",
-    "postbuild": "cd src && copy ./api/**/*.graphql ../build/api/",
-    "start": "babel-node build/server.js"
+    "postbuild": "cd src && copy ./api/**/*.graphql ../build/api/"
   }
 }
