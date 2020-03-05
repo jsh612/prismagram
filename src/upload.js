@@ -22,6 +22,7 @@ const upload = multer({
 });
 
 // single("input태그 name")
+// (formData 이용시 : formData.append("여기이름", 파일)) -->formData.append("file", 파일)
 export const uploadMiddleware = upload.single("file");
 
 export const uploadController = (req, res) => {
